@@ -15,7 +15,7 @@
 2. Click on **"Add package from Git URL..."**.
 3. Enter the following URL:
    ```
-   https://github.com/yourusername/savesystem.git
+   [https://github.com/yourusername/savesystem.git](https://github.com/JoshuaLetessier/UnitySaveSystem.git?path=/Packages/com.Faolline.SaveSystem)
    ```
 4. **Click `Add`**, and Unity will automatically download the library.
 

@@ -1,0 +1,17 @@
+{
+  "name": "com.tonnom.savesystem",
+  "version": "1.0.0",
+  "displayName": "Save System",
+  "description": "A modular save system for Unity, supporting JSON and PlayerPrefs.",
+  "unity": "2020.3",
+  "author": {
+    "name": "Faolline",
+    "email": "faolline@gmail.com",
+    "url": "https://github.com/tonnom/savesystem"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.0.2"
+  },
+  "keywords": [ "save", "json", "playerprefs", "savesystem", "data" ],
+  "license": "MIT"
+}

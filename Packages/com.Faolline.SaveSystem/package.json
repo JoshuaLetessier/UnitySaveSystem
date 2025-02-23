@@ -7,7 +7,7 @@
   "author": {
     "name": "Faolline",
     "email": "faolline@gmail.com",
-    "url": "https://github.com/tonnom/savesystem"
+    "url": "https://github.com/JoshuaLetessier/UnitySaveSystem.git"
   },
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.0.2"

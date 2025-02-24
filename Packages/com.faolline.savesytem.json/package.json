@@ -1,0 +1,14 @@
+{
+  "name": "com.faolline.savesystem.json",
+  "version": "1.0.0",
+  "displayName": "Save System JSON",
+  "description": "JSON module for the Save System.",
+  "unity": "2020.3",
+  "dependencies": {
+    "com.faolline.savesystem.core": "1.0.0"
+  },
+  "author": {
+    "name": "Faolline",
+    "email": "faolline@gmail.com"
+  }
+}

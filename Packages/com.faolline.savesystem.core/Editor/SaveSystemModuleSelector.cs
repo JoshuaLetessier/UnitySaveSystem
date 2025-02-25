@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 public class SaveSystemModuleSelector : EditorWindow
 {
     private static string manifestPath = Path.Combine(Directory.GetCurrentDirectory(), "Packages/manifest.json");
-    private static string moduleConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "Packages/com.faolline.savesystem/Editor/SaveSystemModules.json");
+    private static string moduleConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "Packages/com.faolline.savesystem.core/Editor/SaveSystemModules.json");
 
     private Dictionary<string, string> moduleUrls = new Dictionary<string, string>();
     private Dictionary<string, bool> moduleToggles = new Dictionary<string, bool>();

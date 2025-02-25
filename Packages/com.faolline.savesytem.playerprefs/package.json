@@ -1,8 +1,8 @@
 {
-  "name": "com.faolline.savesystem.json",
+  "name": "com.faolline.savesystem.playerprefs",
   "version": "1.0.0",
-  "displayName": "Save System Module - JSON",
-  "description": "Save System Module - JSON",
+  "displayName": "Save System Module - PlayerPrefs",
+  "description": "Save System Module - PlayerPrefs",
   "unity": "2020.3",
   "author": {
     "name": "Faolline",
@@ -12,6 +12,6 @@
   "dependencies": {
     "com.faolline.savesystem.core": "1.0.0"
   },
-  "keywords": [ "save", "json"],
+  "keywords": [ "save", "playerprefs"],
   "license": "MIT"
 }

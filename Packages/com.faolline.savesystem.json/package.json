@@ -1,8 +1,8 @@
 {
   "name": "com.faolline.savesystem.json",
   "version": "1.0.0",
-  "displayName": "Save System",
-  "description": "A modular save system for Unity, supporting JSON and PlayerPrefs.",
+  "displayName": "Save System Modume - JSON",
+  "description": "Save System Module - JSON",
   "unity": "2020.3",
   "author": {
     "name": "Faolline",
@@ -12,6 +12,6 @@
   "dependencies": {
     "com.faolline.savesystem.core": "1.0.0"
   },
-  "keywords": [ "save", "json", "playerprefs", "savesystem", "data" ],
+  "keywords": [ "save", "json"],
   "license": "MIT"
 }

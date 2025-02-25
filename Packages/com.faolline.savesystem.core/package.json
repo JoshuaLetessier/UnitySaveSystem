@@ -12,6 +12,6 @@
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.0.2"
   },
-  "keywords": [ "save", "json", "playerprefs", "savesystem", "data" ],
+  "keywords": [ "save", "savesystem", "data" ],
   "license": "MIT"
 }

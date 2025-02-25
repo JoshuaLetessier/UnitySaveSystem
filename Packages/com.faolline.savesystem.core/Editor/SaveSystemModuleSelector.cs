@@ -9,10 +9,10 @@ using Newtonsoft.Json;
 public class SaveSystemModuleSelector : EditorWindow
 {
     private static string manifestPath = Path.Combine(Directory.GetCurrentDirectory(), "Packages/manifest.json");
-    private static string moduleConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "Packages/com.faolline.savesystem.core/Editor/SaveSystemModules.json");
+    private static string moduleConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "Packages/com.faolline.savesystem/Editor/SaveSystemModules.json");
 
-    private Dictionary<string, string> moduleUrls = new Dictionary<string, string>(); // Stocke les URLs des modules
-    private Dictionary<string, bool> moduleToggles = new Dictionary<string, bool>(); // Stocke les états des cases à cocher
+    private Dictionary<string, string> moduleUrls = new Dictionary<string, string>();
+    private Dictionary<string, bool> moduleToggles = new Dictionary<string, bool>();
 
     private ListRequest listRequest;
     private bool isCheckingPackages = true;
@@ -44,27 +44,38 @@ public class SaveSystemModuleSelector : EditorWindow
         foreach (var module in moduleList.modules)
         {
             moduleUrls[module.package] = module.url;
-            moduleToggles[module.package] = false; // Initialisation (sera mis à jour après la vérification des packages installés)
+            moduleToggles[module.package] = false;
         }
     }
 
     private void OnGUI()
     {
-        GUILayout.Label("Select Save System Modules", EditorStyles.boldLabel);
-
+        GUILayout.Space(5);
+        GUILayout.Label("🔧 Save System Modules", EditorStyles.boldLabel);
+        GUILayout.Space(5);
+        
         if (isCheckingPackages)
         {
-            GUILayout.Label("Checking installed packages...");
+            EditorGUILayout.HelpBox("Checking installed packages...", MessageType.Info);
             return;
         }
 
-        // Génère dynamiquement l'UI des modules
-        foreach (var module in moduleToggles.Keys)
+        EditorGUILayout.BeginVertical("box"); // Ajoute une boîte autour des modules pour améliorer la visibilité
+        
+        var keys = new List<string>(moduleToggles.Keys); // 🔥 Stocke les clés avant l'itération
+
+        for (int i = 0; i < keys.Count; i++)
         {
-            moduleToggles[module] = EditorGUILayout.Toggle(module, moduleToggles[module]);
+            string module = keys[i];
+            moduleToggles[module] = EditorGUILayout.ToggleLeft(ObjectNames.NicifyVariableName(module), moduleToggles[module]);
         }
 
-        if (GUILayout.Button("Apply Changes"))
+        EditorGUILayout.EndVertical();
+
+        GUILayout.Space(10);
+
+        GUI.enabled = true; // Désactiver le bouton si aucun changement
+        if (GUILayout.Button("✅ Apply Changes", GUILayout.Height(30)))
         {
             UpdateManifest();
         }
@@ -115,7 +126,6 @@ public class SaveSystemModuleSelector : EditorWindow
         }
     }
 
-    // Classe pour stocker les modules à partir du JSON
     [System.Serializable]
     private class ModuleList
     {

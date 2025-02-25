@@ -1,0 +1,14 @@
+{
+    "modules": [
+        {
+            "name": "JSON Save System",
+            "package": "com.faolline.savesystem.json",
+            "url": "https://github.com/JoshuaLetessier/UnitySaveSystem.git?path=/Packages/com.faolline.savesystem.json"
+        },
+        {
+            "name": "PlayerPrefs Save System",
+            "package": "com.faolline.savesystem.playerprefs",
+            "url": "https://github.com/JoshuaLetessier/UnitySaveSystem.git?path=/Packages/com.faolline.savesystem.playerprefs"
+        }
+    ]
+}

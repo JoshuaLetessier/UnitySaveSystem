@@ -1,19 +1,18 @@
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEditor.PackageManager.Requests;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class SaveSystemModuleSelector : EditorWindow
 {
     private static string manifestPath = Path.Combine(Directory.GetCurrentDirectory(), "Packages/manifest.json");
+    private static string moduleConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "Packages/com.faolline.savesystem/Editor/SaveSystemModules.json");
 
-    private static string jsonModuleURL = "https://github.com/JoshuaLetessier/UnitySaveSystem.git?path=/Packages/com.faolline.savesystem.json";
-    private static string prefsModuleURL = "https://github.com/JoshuaLetessier/UnitySaveSystem.git?path=/Packages/com.faolline.savesystem.playerprefs";
-
-    private bool useJson;
-    private bool usePlayerPrefs;
+    private Dictionary<string, string> moduleUrls = new Dictionary<string, string>(); // Stocke les URLs des modules
+    private Dictionary<string, bool> moduleToggles = new Dictionary<string, bool>(); // Stocke les états des cases à cocher
 
     private ListRequest listRequest;
     private bool isCheckingPackages = true;
@@ -26,9 +25,27 @@ public class SaveSystemModuleSelector : EditorWindow
 
     private void OnEnable()
     {
-        // 🔄 Démarre une requête pour lister les packages installés
+        LoadModulesFromJson();
         listRequest = Client.List();
         isCheckingPackages = true;
+    }
+
+    private void LoadModulesFromJson()
+    {
+        if (!File.Exists(moduleConfigPath))
+        {
+            Debug.LogError($"Module config file not found at {moduleConfigPath}");
+            return;
+        }
+
+        string jsonContent = File.ReadAllText(moduleConfigPath);
+        ModuleList moduleList = JsonConvert.DeserializeObject<ModuleList>(jsonContent);
+
+        foreach (var module in moduleList.modules)
+        {
+            moduleUrls[module.package] = module.url;
+            moduleToggles[module.package] = false; // Initialisation (sera mis à jour après la vérification des packages installés)
+        }
     }
 
     private void OnGUI()
@@ -41,8 +58,11 @@ public class SaveSystemModuleSelector : EditorWindow
             return;
         }
 
-        useJson = EditorGUILayout.Toggle("JSON Save System", useJson);
-        usePlayerPrefs = EditorGUILayout.Toggle("PlayerPrefs Save System", usePlayerPrefs);
+        // Génère dynamiquement l'UI des modules
+        foreach (var module in moduleToggles.Keys)
+        {
+            moduleToggles[module] = EditorGUILayout.Toggle(module, moduleToggles[module]);
+        }
 
         if (GUILayout.Button("Apply Changes"))
         {
@@ -60,51 +80,53 @@ public class SaveSystemModuleSelector : EditorWindow
 
         string manifestContent = File.ReadAllText(manifestPath);
 
-        // 📥 Ajoute ou supprime le module JSON
-        if (useJson && !manifestContent.Contains(jsonModuleURL))
+        foreach (var module in moduleToggles.Keys)
         {
-            manifestContent = manifestContent.Replace("\"dependencies\": {", $"\"dependencies\": {{\n    \"com.faolline.savesystem.json\": \"{jsonModuleURL}\",");
-        }
-        else if (!useJson && manifestContent.Contains(jsonModuleURL))
-        {
-            manifestContent = manifestContent.Replace($"\"com.faolline.savesystem.json\": \"{jsonModuleURL}\",", "");
-        }
+            string packageUrl = moduleUrls[module];
 
-        // 📥 Ajoute ou supprime le module PlayerPrefs
-        if (usePlayerPrefs && !manifestContent.Contains(prefsModuleURL))
-        {
-            manifestContent = manifestContent.Replace("\"dependencies\": {", $"\"dependencies\": {{\n    \"com.faolline.savesystem.playerprefs\": \"{prefsModuleURL}\",");
-        }
-        else if (!usePlayerPrefs && manifestContent.Contains(prefsModuleURL))
-        {
-            manifestContent = manifestContent.Replace($"\"com.faolline.savesystem.playerprefs\": \"{prefsModuleURL}\",", "");
+            if (moduleToggles[module] && !manifestContent.Contains(packageUrl))
+            {
+                manifestContent = manifestContent.Replace("\"dependencies\": {", $"\"dependencies\": {{\n    \"{module}\": \"{packageUrl}\",");
+            }
+            else if (!moduleToggles[module] && manifestContent.Contains(packageUrl))
+            {
+                manifestContent = manifestContent.Replace($"\"{module}\": \"{packageUrl}\",", "");
+            }
         }
 
         File.WriteAllText(manifestPath, manifestContent);
         Debug.Log("✅ Package manifest updated. Refreshing UPM...");
-
-        // 🔄 Rafraîchit Unity Package Manager immédiatement
         Client.Resolve();
     }
 
     private void Update()
     {
-        // 📋 Vérifie la liste des packages installés et met à jour les cases à cocher
         if (listRequest != null && listRequest.IsCompleted && isCheckingPackages)
         {
             isCheckingPackages = false;
             foreach (var package in listRequest.Result)
             {
-                if (package.packageId.Contains("com.faolline.savesystem.json"))
+                if (moduleToggles.ContainsKey(package.name))
                 {
-                    useJson = true;
-                }
-                if (package.packageId.Contains("com.faolline.savesystem.playerprefs"))
-                {
-                    usePlayerPrefs = true;
+                    moduleToggles[package.name] = true;
                 }
             }
-            Repaint(); // 🔄 Met à jour l'affichage
+            Repaint();
         }
+    }
+
+    // Classe pour stocker les modules à partir du JSON
+    [System.Serializable]
+    private class ModuleList
+    {
+        public List<Module> modules;
+    }
+
+    [System.Serializable]
+    private class Module
+    {
+        public string name;
+        public string package;
+        public string url;
     }
 }

@@ -13,7 +13,7 @@
         {
             "name": "Save System Encryption",
             "package": "com.faolline.savesystem.encryption",
-            "url": "https://github.com/JoshuaLetessier/UnitySaveSystem.git?path=/Packages/com.faolline.savesystem.encryption#Module_AES-256"
+            "url": "https://github.com/JoshuaLetessier/UnitySaveSystem.git?path=/Packages/com.faolline.savesystem.encryption"
         }
     ]
 }

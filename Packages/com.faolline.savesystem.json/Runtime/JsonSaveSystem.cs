@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace SaveSystem
+namespace SaveSystemJson
 {
     public class JsonSaveSystem<T> : ISaveSystem<T>
     {

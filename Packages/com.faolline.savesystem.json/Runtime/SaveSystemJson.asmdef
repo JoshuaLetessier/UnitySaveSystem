@@ -1,6 +1,6 @@
 {
-    "name": "com.faolline.savesystem.core",
-    "references": [],
+    "name": "com.faolline.savesystem.json",
+    "references": [com.faolline.savesystem.core],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

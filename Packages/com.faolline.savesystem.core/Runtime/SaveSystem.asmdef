@@ -1,10 +1,6 @@
 {
     "name": "com.faolline.savesystem",
-    "references": [
-        com.faolline.savesystem.json,
-        com.faolline.savesystem.playerprefs,
-        com.faolline.savesystem.encryption
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

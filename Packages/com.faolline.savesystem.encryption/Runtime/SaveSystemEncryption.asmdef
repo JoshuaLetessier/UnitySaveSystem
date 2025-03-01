@@ -1,13 +1,6 @@
 {
-    "name": "com.faolline.savesystem.encryption",
-    "references": [com.faolline.savesystem.core],
+    "name": "SaveSystemEncryption",
+    "references": [ "SaveSystemCore" ],
     "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+    "autoReferenced": true
 }

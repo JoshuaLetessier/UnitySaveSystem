@@ -8,7 +8,7 @@ using System.Text;
 namespace SaveSystem
 {
     namespace SSJson
-    { 
+    {
         public class JsonSaveSystem<T> : ISaveSystem<T>
         {
             private readonly string saveDirectory = Application.persistentDataPath + "/Saves/";

@@ -1,13 +1,6 @@
 {
-    "name": "com.faolline.savesystem.json",
-    "references": [com.faolline.savesystem.core],
+    "name": "SaveSystemJson",
+    "references": [ "SaveSystemCore" ],
     "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": false,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+    "autoReferenced": true
 }

@@ -1,6 +1,10 @@
 {
     "name": "com.faolline.savesystem.core",
-    "references": [],
+    "references": [
+        com.faolline.savesystem.encryption,
+        com.faolline.savesystem.json,
+        com.faolline.savesystem.playerperfs
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,6 +1,6 @@
 {
     "name": "com.faolline.savesystem.encryption",
-    "references": [],
+    "references": [com.faolline.savesystem.core],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

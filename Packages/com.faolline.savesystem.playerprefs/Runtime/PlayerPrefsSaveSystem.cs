@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace SaveSystem
 {
-    namespace PlayerPrefs
+    namespace SSPlayerPrefs
     {
         public class PlayerPrefsSaveSystem<T> : ISaveSystem<T>
         {

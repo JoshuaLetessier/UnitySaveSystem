@@ -1,6 +1,6 @@
 namespace SaveSystem
 {
-    namespace Encrypted
+    namespace SSEncrypted
     {
 
         public class EncryptedSaveDecorator<T> : ISaveSystem<T>

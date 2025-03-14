@@ -82,9 +82,7 @@ This project is licensed under the **MIT License**. You are free to use, modify,
 ---
 
 ### 🚀 Future Improvements
-- 🔄 **Auto-refresh system** to detect installed modules without reopening the editor.
 - 🔐 **Encryption module** for secured save files.
 - ☁ **Cloud storage support** (Firebase, Google Drive, AWS).
 - 📂 **Multiple storage backends** (SQL, NoSQL, Binary).
-
 ---

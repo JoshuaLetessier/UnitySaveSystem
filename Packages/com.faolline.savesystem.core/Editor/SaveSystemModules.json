@@ -9,11 +9,6 @@
             "name": "PlayerPrefs Save System",
             "package": "com.faolline.savesystem.playerprefs",
             "url": "https://github.com/JoshuaLetessier/UnitySaveSystem.git?path=/Packages/com.faolline.savesystem.playerprefs"
-        },
-        {
-            "name": "Save System Encryption",
-            "package": "com.faolline.savesystem.encryption",
-            "url": "https://github.com/JoshuaLetessier/UnitySaveSystem.git?path=/Packages/com.faolline.savesystem.encryption"
         }
     ]
 }

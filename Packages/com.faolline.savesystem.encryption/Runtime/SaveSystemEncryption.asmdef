@@ -1,6 +1,0 @@
-{
-    "name": "SaveSystemEncryption",
-    "references": [ "SaveSystemCore" ],
-    "includePlatforms": [],
-    "autoReferenced": true
-}

@@ -53,5 +53,10 @@ namespace SaveSystem
             }
             return false;
         }
+
+        public Dictionary<Type, ISaveSystem<T>> GetSaveSystems()
+        {
+            return saveSystems;
+        }
     }
 }

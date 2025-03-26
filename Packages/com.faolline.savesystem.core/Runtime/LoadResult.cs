@@ -8,7 +8,7 @@ namespace SaveSystem
     {
         private readonly Dictionary<Type, T> _data;
 
-        public SaveResult(Dictionary<Type, T> data)
+        public LoadResult(Dictionary<Type, T> data)
         {
             _data = data;
         }

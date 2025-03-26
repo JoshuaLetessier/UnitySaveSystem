@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using SaveResult;
+
 namespace SaveSystem
 {
     public class SaveManager<T>
@@ -21,17 +23,43 @@ namespace SaveSystem
             }
         }
 
-        public Dictionary<Type, T> Load(string key)
+        public SaveResult<T> Load(string key)
         {
-            Dictionary<Type, T> results = new();
-            foreach (var system in saveSystems)
+
+            var results  = new Dictionary<Type, T>();
+
+            foreach(var system in saveSystems.Values)
             {
-                if (system.Value.Exists(key))
+                if (system.Exists(key))
                 {
-                    results[system.Key] = system.Value.Load(key);
+                    var data = system.Load(key);
+                    if(data != null)
+                    {
+                        results[system.GetType()] = data;
+                    }
                 }
             }
-            return results;
+
+            return new SaveResult<T>(results);
+
+            // Dictionary<Type, T> results = new();
+            // foreach (var system in saveSystems)
+            // {
+            //     if (system.Value.Exists(key))
+            //     {
+            //         results[system.Key] = system.Value.Load(key);
+            //     }
+            // }
+            // return results;
+        }
+
+        public T LoadFrom<TSystem>(string key) where TSystem : ISaveSystem<T>
+        {
+            if (saveSystems.TryGetValue(typeof(TSystem), out var system))
+            {
+                return system.Load(key);
+            }
+            return default;
         }
 
         public void Delete(string key)

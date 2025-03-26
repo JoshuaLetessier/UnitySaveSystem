@@ -95,6 +95,15 @@ namespace SaveSystem
                 }
             }
 
+            public void DeleteAll()
+            {
+                foreach (string file in Directory.GetFiles(saveDirectory))
+                {
+                    File.Delete(file);
+                }
+                Debug.Log("Tous les fichiers ont été supprimés.");
+            }
+
             public bool Exists(string key)
             {
                 return File.Exists(GetPath(key));

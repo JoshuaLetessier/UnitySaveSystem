@@ -11,6 +11,7 @@ namespace SaveSystem
         void Save(string key, T data);
         T Load(string key);
         void Delete(string key);
+        void DeleteAll();
         bool Exists(string key);
     }
 }

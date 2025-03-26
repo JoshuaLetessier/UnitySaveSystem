@@ -33,7 +33,13 @@ namespace SaveSystem
                 PlayerPrefs.DeleteKey(key);
                 Debug.Log($"[PlayerPrefs] Clé supprimée : {key}");
             }
-    
+
+            public void DeleteAll()
+            {
+                PlayerPrefs.DeleteAll();
+                Debug.Log($"[PlayerPrefs] Toutes les clés ont été supprimées");
+            }
+
             public bool Exists(string key)
             {
                 return PlayerPrefs.HasKey(key);

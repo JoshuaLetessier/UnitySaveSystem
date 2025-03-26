@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using SaveResult;
-
 namespace SaveSystem
 {
     public class SaveManager<T>
     {
         private Dictionary<Type, ISaveSystem<T>> saveSystems = new();
+
         public void Register<TSystem>(TSystem system) where TSystem : ISaveSystem<T>
         {
             saveSystems[typeof(TSystem)] = system;

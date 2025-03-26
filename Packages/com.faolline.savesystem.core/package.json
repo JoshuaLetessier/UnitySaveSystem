@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "displayName": "Save System",
   "description": "A modular save system for Unity, supporting JSON and PlayerPrefs.",
-  "unity": "6.0.0",
+  "unity": "2022.3"
   "author": {
     "name": "Faolline",
     "email": "faolline@gmail.com",

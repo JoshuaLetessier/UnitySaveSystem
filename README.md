@@ -48,27 +48,25 @@ Easily extendable and configurable through Unity's **Package Manager (UPM)**.
 
 ### 📌 2️⃣ Declare a `SaveManager<T>`
 ```csharp
-public class TestData
-{
-    public string Name;
-    public int Score;
-}
-
-SaveManager<TestData> settingsManager = new SaveManager<TestData>();
-settingsManager.Register(new JsonSaveSystem<TestData>()); // Exemple with Json
-settingsManager.Register(new PlayerPrefsSaveSystem<TestData>()); //Exemple with PlayerPreds
+SaveManager<GameSettings> settingsManager = new SaveManager<GameSettings>();
+settingsManager.Register(new JsonSaveSystem<GameSettings>());
+settingsManager.Register(new PlayerPrefsSaveSystem<GameSettings>());
 ```
 
 ---
 
 ### 📌 3️⃣ Save and Load Data
 ```csharp
-settingsManager.Save("game_settings", new GamTestDataeSettings { Volume = 80.0f, Fullscreen = true });
+settingsManager.Save("game_settings", new GameSettings { Volume = 80.0f, Fullscreen = true });
 
 if (settingsManager.Exists("game_settings"))
 {
-    var data = settingsManager.Load("game_settings");
-    Debug.Log($"📂 Loaded: Volume={data[typeof(JsonSaveSystem<TestData>)].Volume}");
+    var result = settingsManager.Load("game_settings");
+
+    if (result.TryGet<JsonSaveSystem<GameSettings>>(out var data))
+    {
+        Debug.Log($"📂 Loaded from JSON: Volume={data.Volume}");
+    }
 }
 ```
 
@@ -91,4 +89,3 @@ This project is licensed under the **MIT License**. You are free to use, modify,
 - 🔐 **Encryption module** for secured save files.
 - ☁ **Cloud storage support** (Firebase, Google Drive, AWS).
 - 📂 **Multiple storage backends** (SQL, NoSQL, Binary).
----

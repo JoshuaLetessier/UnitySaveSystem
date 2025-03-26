@@ -22,7 +22,7 @@ namespace SaveSystem
             }
         }
 
-        public SaveResult<T> Load(string key)
+        public LoadResult<T> Load(string key)
         {
 
             var results  = new Dictionary<Type, T>();
@@ -39,17 +39,7 @@ namespace SaveSystem
                 }
             }
 
-            return new SaveResult<T>(results);
-
-            // Dictionary<Type, T> results = new();
-            // foreach (var system in saveSystems)
-            // {
-            //     if (system.Value.Exists(key))
-            //     {
-            //         results[system.Key] = system.Value.Load(key);
-            //     }
-            // }
-            // return results;
+            return new LoadResult<T>(results);
         }
 
         public T LoadFrom<TSystem>(string key) where TSystem : ISaveSystem<T>

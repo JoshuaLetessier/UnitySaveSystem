@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace SaveSystem
 {
-    public class SaveResult<T>
+    public class LoadResult<T>
     {
         private readonly Dictionary<Type, T> _data;
 
@@ -18,11 +18,6 @@ namespace SaveSystem
             return _data.TryGetValue(typeof(TSystem), out value);
         }
 
-        public T Get<TSystem>() where TSystem : ISaveSystem<T>
-        {
-            return _data.TryGetValue(typeof(TSystem), out var value) ? value : default;
-        }
-
         public bool Has<TSystem>() where TSystem : ISaveSystem<T>
         {
             return _data.ContainsKey(typeof(TSystem));
@@ -30,7 +25,7 @@ namespace SaveSystem
 
         public override string ToString()
         {
-            return $"SaveResult<{typeof(T).Name}>[{string.Join(", ", _data.Keys.Select(k => k.Name))}]";
+            return $"LoadResult<{typeof(T).Name}>[{string.Join(", ", _data.Keys.Select(k => k.Name))}]";
         }
     }
 }
